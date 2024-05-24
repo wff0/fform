@@ -2,6 +2,7 @@ package session
 
 import (
 	"database/sql"
+	"fform/dialect"
 	"os"
 	"testing"
 
@@ -10,7 +11,7 @@ import (
 
 var TestDB *sql.DB
 
-const dsn = "root:123456@tcp(127.0.0.1:3306)/ffgorm"
+const dsn = "root:123456@tcp(127.0.0.1:3306)/fform"
 
 func TestMain(m *testing.M) {
 	TestDB, _ = sql.Open("mysql", dsn)
@@ -20,7 +21,8 @@ func TestMain(m *testing.M) {
 }
 
 func New() *Session {
-	return NewSession(TestDB)
+	d, _ := dialect.GetDialect("mysql")
+	return NewSession(TestDB, d)
 }
 
 func TestSession_Exec(t *testing.T) {

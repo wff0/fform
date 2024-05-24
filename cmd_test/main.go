@@ -8,7 +8,7 @@ import (
 	"fmt"
 )
 
-const dsn = "root:123456@tcp(127.0.0.1:3306)/ffgorm"
+const dsn = "root:123456@tcp(127.0.0.1:3306)/fform"
 
 func main() {
 	engine, _ := fform.NewEngine("mysql", dsn)

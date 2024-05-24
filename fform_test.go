@@ -6,7 +6,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-const dsn = "root:123456@tcp(127.0.0.1:3306)/ffgorm"
+const dsn = "root:123456@tcp(127.0.0.1:3306)/fform"
 
 func OpenDB(t *testing.T) *Engine {
 	t.Helper()
