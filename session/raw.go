@@ -11,12 +11,22 @@ import (
 
 type Session struct {
 	db       *sql.DB
+	tx       *sql.Tx
 	dialect  dialect.Dialect
 	refTable *schema.Schema
 	clause   clause.Clause
 	sql      strings.Builder
 	sqlVars  []interface{}
 }
+
+type CommonDB interface {
+	Query(query string, args ...interface{}) (*sql.Rows, error)
+	QueryRow(query string, args ...interface{}) *sql.Row
+	Exec(query string, args ...interface{}) (sql.Result, error)
+}
+
+var _ CommonDB = (*sql.DB)(nil)
+var _ CommonDB = (*sql.Tx)(nil)
 
 func NewSession(db *sql.DB, dialect dialect.Dialect) *Session {
 	return &Session{
